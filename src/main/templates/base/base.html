@@ -1,0 +1,77 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="en" class="h-100">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+        {% block title %}<title>AutoMax - List Your Car Today</title>{% endblock %}
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+
+
+
+
+        <link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet">
+        <link href="{% static "css/style.css" %}" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    </head>
+
+    <body>
+        {% if messages  %}
+        {% for message in messages %}
+        <div {% if message.tags  %}  class="alert alert-{{ message.tags }}" {% endif %}>
+            {{message}} 
+        </div>
+        {% endfor %}
+        {% endif %}
+
+        {% block 'header' %}
+        <header class="p-3 bg-dark text-white w-100 nav-masthead">
+            <div class="container">
+                <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                    <a href="{% url 'home' %}"
+                        class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                        <img class="bi me-2" width="32" height="32" src="{% static 'images/logo.png' %}"
+                            aria-label="Bootstrap">
+                    </a>
+                    {% if request.user.is_authenticated %}
+                    <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                        <li>
+                            <a href="{% url 'profile' %}" class="nav-link px-2">Profile</a>
+                        </li>
+                    </ul>
+                    <div class="text-end">
+                        <a type="button" href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </header>        
+        {% endblock  %}
+
+
+        {% block 'body' %} 
+        {% endblock  %}
+    </body>
+
+    {% block 'footer' %}
+
+    <footer class="footer text-muted bg-dark py-5">
+        <div class="container">
+            <p class="float-end mb-1">
+                Powered By <b>Abdul Rafay Atiq</b>
+            </p>
+            <p class="mb-1">AutoMax - Best Place To Buy & Sell Cars</p>
+            <p>Copyright © {% now 'Y' %} <a href="" class="text-white">AutoMax</a> by <a href="https://preneure.com"
+                class="text-white">Preneure.com</a></p>
+        </div>
+    </footer>
+
+    {% endblock  %}
+
+</html>
